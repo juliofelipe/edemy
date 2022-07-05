@@ -1,5 +1,6 @@
 import User from "../models/user";
 import { hashPassword, comparePassword} from "../utils/auth";
+import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
     try {
@@ -35,6 +36,7 @@ export const login = async (req, res) => {
         const user = await User.findOne({ email }).exec();
         if (!user) return res.status(400).send("No user found");
         const match = await comparePassword(password, user.password)
+        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET)
     } catch (err) {
         console.log(err)
         return res.status(400).send("Error. Try again.")

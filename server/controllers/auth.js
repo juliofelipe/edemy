@@ -28,3 +28,15 @@ export const register = async (req, res) => {
         return res.status(400).send("Error. Try again.");
     }
 };
+
+export const login = async (req, res) => {
+    try {
+        const {email, password} = req.body
+        const user = await User.findOne({ email }).exec();
+        if (!user) return res.status(400).send("No user found");
+        const match = await comparePassword(password, user.password)
+    } catch (err) {
+        console.log(err)
+        return res.status(400).send("Error. Try again.")
+    }
+}

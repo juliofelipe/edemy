@@ -1,4 +1,4 @@
-import { userReducer, createContext } from "react";
+import { useReducer, createContext } from "react";
 
 const initialState = {
     user: null,

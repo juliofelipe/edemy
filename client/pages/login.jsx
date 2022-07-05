@@ -20,7 +20,7 @@ const Login = () => {
         });
       
         console.log("LOGIN RESPONSE", data);
-        //setLoading(false);
+        setLoading(false);
         } catch (err) {
             toast.error(err.response.data)
             setLoading(false);

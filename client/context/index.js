@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useEffect } from "react";
 
 const initialState = {
     user: null,
@@ -19,6 +19,14 @@ const rootReducer = (state, action) => {
 
 const Provider = ({ children }) => {
     const [state, dispatch] = useReducer(rootReducer, initialState);
+
+    useEffect(() => {
+      dispatch ({
+        type: "LOGIN",
+        payload: JSON.parse(window.localStorage.getItem("user")),
+      });
+    }, [])
+    
 
     return (
         <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>

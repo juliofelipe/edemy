@@ -62,3 +62,13 @@ export const logout = async (req, res) => {
         console.log(err);
     }
 }
+
+export const currentUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password").exec();
+        console.log("CURRENT USER: " + user);
+        return res.json(user);
+    } catch (err) {
+        console.log(err);
+    }
+};

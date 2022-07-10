@@ -38,7 +38,7 @@ const Login = () => {
 
         window.localStorage.setItem("user", JSON.stringify(data));
 
-        router.push("/");
+        router.push("/user");
 
         // setLoading(false);
         } catch (err) {

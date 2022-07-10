@@ -126,3 +126,24 @@ export const forgotPassword = async (req, res) => {
       console.log(err);
   } 
 }
+
+export const resetPassword = async (req, res) => {
+  try {
+      const {email, code, newPassword} = req.body;
+
+      const hashedPassword = await hashPassword(newPassword);
+
+      const user = User.findOneAndUpdate({
+        email,
+        passwordResetCode: code,
+      }, {
+        password: hashedPassword,
+        passwordResetCode: "",
+      }).exec();
+      if (!user) return res.status(404).send("User not found");
+      return res.json({ ok: true });
+  } catch (err) {
+      console.log(err);
+      return res.status(400).send("Error. Try again.");
+  }
+}

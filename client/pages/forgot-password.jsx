@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import { Context } from "../context";
 import { useRouter } from "next/router";
 
@@ -48,6 +47,7 @@ const ForgotPassword = () => {
        setCode("");
        setNewPassword("");
        setLoading(false);
+       toast("Great! Now you can login with your new password");
       } catch (err) {
         setLoading(false);
         toast(err.response.data);
